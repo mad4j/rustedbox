@@ -19,13 +19,13 @@ pub struct YesArgs {
 
 pub fn yes_command(args: &YesArgs) {
 
-    let count = args.count.unwrap_or(1); 
-    let mut index = count;
+    let forever = args.count.is_none(); 
+    let mut index = args.count.unwrap_or(1);
 
     while index > 0 {
         println!("{}", args.message);
         thread::sleep(time::Duration::from_secs(args.delay));
-        if count > 0 {
+        if !forever {
             index = index - 1;
         }
     }
