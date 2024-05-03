@@ -12,13 +12,16 @@ struct Args {
 
 #[derive(Debug, Subcommand)]
 enum Commands {
-    /// does testing things
+    /// Output a string repeatedly, generally, until killed
     Yes(YesArgs),
 }
 
 fn main() {
+
+    // parse command-line arguments
     let args = Args::parse();
 
+    // execute specific command
     match &args.command {
         Commands::Yes(args) => yes_command(&args),
     }
