@@ -4,6 +4,7 @@ version = "0.1.0"
 authors = ["Daniele Olmisani <daniele.olmisani@gmail.com>"]
 license = "GPL-3.0"
 edition = "2021"
+description = "collection of funny and somewath useful tools"
 readme = "README.md"
 homepage = "https://mad4j.github.io/rustedbox/"
 repository = "https://github.com/mad4j/rustedbox"
