@@ -1,8 +1,6 @@
 use clap::{Parser, Subcommand};
 use commands::{
-    ent::{ent_command, EntArgs},
-    yes::{yes_command, YesArgs},
-    zeros::{zeros_command, ZerosArgs},
+    beep::beep_command, ent::{ent_command, EntArgs}, hash::{hash_command, HashArgs}, yes::{yes_command, YesArgs}, zeros::{zeros_command, ZerosArgs}
 };
 
 mod commands;
@@ -16,8 +14,15 @@ struct Args {
 
 #[derive(Debug, Subcommand)]
 enum Commands {
-    /// Compute simple Entropy
+
+    /// Play a beep
+    Beep,
+
+    /// Compute simple bits entropy
     Ent(EntArgs),
+
+    /// Compute 64-bit hash on specified file
+    Hash(HashArgs),
 
     /// Output a string repeatedly, generally, until killed
     Yes(YesArgs),
@@ -26,14 +31,19 @@ enum Commands {
     Zeros(ZerosArgs),
 }
 
-fn main() {
+fn main() -> Result<(), Box<dyn std::error::Error>> {
     // parse command-line arguments
     let args = Args::parse();
 
     // execute specific command
     match &args.command {
-        Commands::Ent(args) => ent_command(&args),
-        Commands::Yes(args) => yes_command(&args),
-        Commands::Zeros(args) => zeros_command(&args),
-    }
+        Commands::Beep => beep_command()?,
+        Commands::Ent(args) => ent_command(&args)?,
+        Commands::Hash(args) => hash_command(&args)?,
+        Commands::Yes(args) => yes_command(&args)?,
+        Commands::Zeros(args) => zeros_command(&args)?,
+    };
+
+    // return ok
+    Ok(())
 }

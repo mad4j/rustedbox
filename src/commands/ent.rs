@@ -36,20 +36,18 @@ fn calculate_entropy(file_path: &Path) -> io::Result<f64> {
         entropy -= probability * probability.log2();
     }
 
+    // return entropy level in bits
     Ok(entropy)
 }
 
-pub fn ent_command(args: &EntArgs) {
-    if let Ok(result) = calculate_entropy(&args.path) {
-        if args.full {
-            println!("{}", result);
-        } else {
-            println!("{:.2}", result);
-        };
+pub fn ent_command(args: &EntArgs) -> io::Result<()> {
+    let result = calculate_entropy(&args.path)?;
+
+    if args.full {
+        println!("{}", result);
     } else {
-        println!(
-            "Unable to read '{}'",
-            args.path.to_str().unwrap_or_default()
-        );
-    }
+        println!("{:.2}", result);
+    };
+
+    Ok(())
 }

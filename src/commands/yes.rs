@@ -1,4 +1,4 @@
-use std::{thread, time};
+use std::{io, thread, time};
 
 use clap::Args;
 
@@ -17,7 +17,7 @@ pub struct YesArgs {
     delay: u64,
 }
 
-pub fn yes_command(args: &YesArgs) {
+pub fn yes_command(args: &YesArgs) -> io::Result<()> {
     let forever = args.count.is_none();
     let mut index = args.count.unwrap_or(1);
 
@@ -28,4 +28,6 @@ pub fn yes_command(args: &YesArgs) {
             index = index - 1;
         }
     }
+
+    Ok(())
 }

@@ -7,3 +7,10 @@ edition = "2021"
 
 [dependencies]
 clap = { version = "4.5.4", features = ["derive"] }
+itertools = "0.12.1"
+rand = "0.8.5"
+ring = "0.17.8"
+
+[target.'cfg(windows)'.build-dependencies]
+winres = "0.1.12"
+
