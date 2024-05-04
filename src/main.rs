@@ -1,6 +1,10 @@
 use clap::{Parser, Subcommand};
 use commands::{
-    beep::beep_command, ent::{ent_command, EntArgs}, hash::{hash_command, HashArgs}, yes::{yes_command, YesArgs}, zeros::{zeros_command, ZerosArgs}
+    beep::beep_command,
+    ent::{ent_command, EntArgs},
+    hash::{hash_command, HashArgs},
+    yes::{yes_command, YesArgs},
+    zeros::{zeros_command, ZerosArgs},
 };
 
 mod commands;
@@ -14,7 +18,6 @@ struct Args {
 
 #[derive(Debug, Subcommand)]
 enum Commands {
-
     /// Play a beep
     Beep,
 

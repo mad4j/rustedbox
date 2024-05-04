@@ -30,11 +30,17 @@ fn calculate_digest<R: Read>(mut reader: R) -> io::Result<Digest> {
 }
 
 pub fn hash_command(args: &HashArgs) -> io::Result<()> {
+    // try to open file
     let input = File::open(&args.path)?;
     let reader = BufReader::new(input);
+
+    // compute digest last 32 bits of SHA256 value
     let digest = calculate_digest(reader)?;
+    let digest = &digest.as_ref()[24..];
 
-    println!("{:02X?}", &digest.as_ref()[24..].iter().format(""));
+    // dump computed digest
+    println!("{:02X?}", digest.iter().format(""));
 
+    // if you are here then return ok
     Ok(())
 }
