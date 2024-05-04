@@ -9,6 +9,7 @@ homepage = "https://mad4j.github.io/rustedbox/"
 repository = "https://github.com/mad4j/rustedbox"
 keywords = ["cli", "tools", "toys"]
 categories = ["command-line-utilities"]
+exclude = ["/resources"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -22,4 +23,3 @@ rodio = "0.17.3"
 
 [target.'cfg(windows)'.build-dependencies]
 winres = "0.1.12"
-

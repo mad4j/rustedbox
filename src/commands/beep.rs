@@ -3,7 +3,7 @@ use std::io::{BufReader, Cursor};
 use rodio::{Decoder, OutputStream};
 
 // sound samples
-const BEEP_BYTES: &[u8; 11468] = include_bytes!("../../resources/beep-10.wav");
+const BEEP_BYTES: &[u8; 11468] = include_bytes!("../../assets/beep-10.wav");
 
 pub fn beep_command() -> anyhow::Result<()> {
     // get default physical sound device handle
