@@ -1,6 +1,7 @@
 use clap::{Parser, Subcommand};
 use commands::{
     beep::beep_command,
+    bits::{bits_command, BitsArgs},
     ent::{ent_command, EntArgs},
     hash::{hash_command, HashArgs},
     yes::{yes_command, YesArgs},
@@ -20,6 +21,9 @@ struct Args {
 enum Commands {
     /// Play a beep
     Beep,
+
+    /// Count bits on specified file
+    Bits(BitsArgs),
 
     /// Compute simple bits entropy
     Ent(EntArgs),
@@ -41,6 +45,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // execute specific command
     match &args.command {
         Commands::Beep => beep_command()?,
+        Commands::Bits(args) => bits_command(&args)?,
         Commands::Ent(args) => ent_command(&args)?,
         Commands::Hash(args) => hash_command(&args)?,
         Commands::Yes(args) => yes_command(&args)?,

@@ -1,9 +1,6 @@
-use std::io::{BufReader, Cursor};
+use std::time::Duration;
 
-use rodio::{Decoder, OutputStream};
-
-// sound samples
-const BEEP_BYTES: &[u8; 11468] = include_bytes!("../../assets/beep-10.wav");
+use rodio::{source::SineWave, OutputStream, Source};
 
 pub fn beep_command() -> anyhow::Result<()> {
     // get default physical sound device handle
@@ -11,8 +8,10 @@ pub fn beep_command() -> anyhow::Result<()> {
 
     // initialize audio framework
     let sink = rodio::Sink::try_new(&handle)?;
-    let reader = BufReader::new(Cursor::new(BEEP_BYTES));
-    let source = Decoder::new(reader)?;
+    //let source = Decoder::new(reader)?;
+    let source = SineWave::new(440.0)
+        .take_duration(Duration::from_secs_f32(0.25))
+        .amplify(0.20);
 
     // play sound
     sink.append(source);
